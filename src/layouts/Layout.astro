@@ -1,4 +1,6 @@
 ---
+import { Icon } from 'astro-icon'
+
 interface Props {
 	title: string;
 	description: string;
@@ -17,11 +19,38 @@ const { title, description } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="mocha transition-colors bg-base text-text">
+	<body class="mocha transition-colors duration-500 bg-base text-text">
+		<div class="absolute flex align-center top-0 right-0 m-1">
+			<a href="https://github.com/kaio-cblima" target="_blank" aria-label="Open my github"><Icon name="github" class="w-10 h-10 m-2 fill-text"></Icon></a>
+			<button id="change-theme" aria-label="Change Theme">
+				<Icon name="sun" class="w-10 h-10 m-2 fill-text mocha-only"></Icon>
+				<Icon name="moon" class="w-10 h-10 m-2 fill-text latte-only"></Icon>
+			</button>
+		</div>
 		<slot />
 	</body>
 </html>
+<script>
+	type Theme = "mocha" | "latte"
+	const changeTheme = (theme: Theme) => {
+		document.body.classList[theme === "mocha" ? "add" : "remove"]("mocha")
+		document.body.classList[theme === "mocha" ? "remove" : "add"]("latte")
+		localStorage.setItem("theme", theme)
+	}
+	changeTheme(localStorage.getItem("theme") as Theme || "mocha")
+	// Only shows body after theme is applied
+	document.body.classList.remove("hidden")
+	document.querySelector("#change-theme")!.addEventListener("click", () => changeTheme(document.body.classList.contains("mocha") ? "latte" : "mocha"))
+</script>
 <style is:global>
+	.latte .mocha-only {
+		display: none;
+	}
+
+	.mocha .latte-only {
+		display: none;
+	}
+
 	html, body { height: 100%; }
 	body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
