@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Kaio Lima" description="A software engineer based in Brazil. With a passion for coding and specialized in building websites that brings ideas to life.">
+	<div class="absolute top-0 right-0">
+		<a href="https://github.com/kaio-cblima" target="_blank"><img src="/icons/github.svg" width="48" height="48"></a>
+	</div>
+	<div class="min-h-screen flex flex-col">
+		<div class="container flex flex-col justify-center px-8 xl:px-64 grow">
+			<div class="flex flex-col items-start px-4">
+				<span class="text-overlay1 text-xl font-bold">Hello, my name is</span>
+				<h3 class="text-green text-8xl font-extrabold">Kaio.</h3>
+				<h4 class="text-4xl text-text font-bold">I create magic for the web.</h4>
+				<p class="text-overlay1 text-lg my-4 max-w-lg">I'm a software engineer based in Brazil. With a passion for coding, I specialize in building websites that brings ideas to life.</p>
+				<a href="mailto:email@kaiolima.dev" target="_blank"><button class="border-blue text-text transition-colors duration-300 ease-in hover:border-green border-2 px-6 py-3">Get In Touch</button></a>
+			</div>
+		</div>
+	</div>
+</Layout>
+<style>
+	#start * {
+		--tw-text-opacity: 0;
+		--tw-border-opacity: 0;
+		transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    	transition-duration: 2s;
+	}
+
+	#start.fadeIn * {
+		--tw-text-opacity: 1;
+		--tw-border-opacity: 1;
+	}
+</style>
+<script>
+	document.querySelector("#start")!.classList.add("fadeIn")
+</script>

@@ -1,0 +1,62 @@
+---
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="mocha transition-colors bg-base text-text">
+		<slot />
+	</body>
+</html>
+<style is:global>
+	html, body { height: 100%; }
+	body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+	.container {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	@media (min-width: 640px) {
+		.container {
+			max-width: 600px;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.container {
+			max-width: 720px;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.container {
+			max-width: 992px;
+		}
+	}
+
+	@media (min-width: 1280px) {
+		.container {
+			max-width: 1230px;
+		}
+	}
+
+	@media (min-width: 1536px) {
+		.container {
+			max-width: 1470px;
+		}
+	}
+</style>
