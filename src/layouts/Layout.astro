@@ -18,6 +18,8 @@ const { title, description } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<link rel="preconnect" href="https://rsms.me/">
+		<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 	</head>
 	<body class="mocha transition-colors duration-500 bg-base text-text">
 		<div class="absolute flex align-center top-0 right-0 m-1">
@@ -51,8 +53,14 @@ const { title, description } = Astro.props;
 		display: none;
 	}
 
+	:root { font-family: 'Inter', sans-serif; }
+	@supports (font-variation-settings: normal) {
+		:root { font-family: 'Inter var', sans-serif; }
+	}
+
 	html, body { height: 100%; }
-	body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+	body { margin: 0; }
+	
 
 	.container {
 		margin-left: auto;
