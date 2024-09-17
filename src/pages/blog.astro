@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro"
+import { fetchArticles } from "../lib/strapi"
+
+const articles = await fetchArticles()
+---
+<Layout title="Blog - Kaio Lima" description="">
+    <div class="flex flex-col container pt-8 gap-6">
+        <div class="flex flex-col gap-2">
+            <h1 class="text-4xl font-bold">Blog</h1>
+            <span class="text-sm">Sometimes I wanna write something so I created this.</span>
+        </div>
+        <div class="flex flex-col gap-2 text-lg">
+            {
+                articles.map(article => <div class="flex gap-2">
+                    <span class="text-subtext0">{new Date(article.attributes.publishedAt).toLocaleString("pt-BR", { dateStyle: "short" })}</span><a href={`/blog/${article.attributes.slug}`} class="text-green underline">{article.attributes.title}</a>
+                </>)
+            }
+        </div>
+    </div>
+</Layout>

@@ -4,9 +4,10 @@ import { Icon } from 'astro-icon'
 interface Props {
 	title: string;
 	description: string;
+	type?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, type } = Astro.props;
 ---
 
 <!doctype html>
@@ -20,37 +21,31 @@ const { title, description } = Astro.props;
 		<title>{title}</title>
 		<link rel="preconnect" href="https://rsms.me/">
 		<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:site_name" content="Kaio Lima" />
+		{type && <meta property="og:type" content={type}>}
 	</head>
-	<body class="mocha transition-colors duration-500 bg-base text-text">
-		<div class="absolute flex align-center top-0 right-0 m-1">
-			<a href="https://github.com/kaio-cblima" target="_blank" aria-label="Open my github"><Icon name="github" class="w-10 h-10 m-2 fill-text"></Icon></a>
-			<button id="change-theme" aria-label="Change Theme">
-				<Icon name="sun" class="w-10 h-10 m-2 fill-text mocha-only"></Icon>
-				<Icon name="moon" class="w-10 h-10 m-2 fill-text latte-only"></Icon>
-			</button>
+	<body class="mocha transition-colors duration-500 text-text">
+		<div class="fixed w-screen h-screen top-0 right-0 _bg -z-10"></div>
+		<div class="min-h-screen flex flex-col w-full _dots pb-6">
+			<div class="absolute flex align-center items-center gap-3 font-medium top-0 right-0 m-1">
+				<a href="/blog" class="hover:text-green">Blog</a>
+				<a href="https://github.com/kaio-cblima" target="_blank" aria-label="Open my github"><Icon name="github" class="w-10 h-10 m-2 fill-text"></Icon></a>
+			</div>
+			<slot />
 		</div>
-		<slot />
 	</body>
 </html>
-<script>
-	type Theme = "mocha" | "latte"
-	const changeTheme = (theme: Theme) => {
-		document.body.classList[theme === "mocha" ? "add" : "remove"]("mocha")
-		document.body.classList[theme === "mocha" ? "remove" : "add"]("latte")
-		localStorage.setItem("theme", theme)
-	}
-	changeTheme(localStorage.getItem("theme") as Theme || "mocha")
-	// Only shows body after theme is applied
-	document.body.classList.remove("hidden")
-	document.querySelector("#change-theme")!.addEventListener("click", () => changeTheme(document.body.classList.contains("mocha") ? "latte" : "mocha"))
-</script>
 <style is:global>
-	.latte .mocha-only {
-		display: none;
+	._bg {
+		background: rgb(30,30,46);
+		background: radial-gradient(circle at 120% 160%, rgba(55,55,84,1) 0%, rgba(30,30,46,1) 68%);
 	}
 
-	.mocha .latte-only {
-		display: none;
+	._dots {
+		background-size: 40px 40px;
+		background-image: radial-gradient(circle, #ffffff0f 1px, rgba(0, 0, 0, 0) 1px);
 	}
 
 	:root { font-family: 'Inter', sans-serif; }
@@ -60,11 +55,17 @@ const { title, description } = Astro.props;
 
 	html, body { height: 100%; }
 	body { margin: 0; }
-	
+
+	:root { font-family: 'Inter', sans-serif; }
+	@supports (font-variation-settings: normal) {
+		:root { font-family: 'Inter var', sans-serif; }
+	}
 
 	.container {
 		margin-left: auto;
 		margin-right: auto;
+		padding-left: 1rem;
+		padding-right: 1rem;
 	}
 
 	@media (min-width: 640px) {
