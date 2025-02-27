@@ -1,0 +1,47 @@
+---
+import Layout from "./Layout.astro";
+
+const { frontmatter } = Astro.props;
+---
+<Layout title={frontmatter.title} description={frontmatter.description} type="article">
+    <div class="container flex flex-col pt-16 pb-6 gap-6">
+        <div class="flex flex-col gap-2">
+            <h1 class="font-bold text-3xl">{frontmatter.title}</h1>
+            <span class="text-subtext0">{new Date(frontmatter.pubDate).toLocaleString("en", { dateStyle: "long", timeZone: "UTC" })}</span>
+        </div>
+        <article class="flex flex-col gap-2 render-markdown">
+            <slot />
+        </article>
+    </div>
+</Layout>
+<style is:global lang="less">
+    .render-markdown {
+        h2 {
+            @apply font-bold text-2xl;
+        }
+
+        h3 {
+            @apply font-bold text-lg;
+        }
+
+        code {
+            @apply bg-surface0 px-1;
+        }
+        
+        pre {
+            @apply !bg-surface0 rounded-md p-1;
+        }
+
+        a {
+            @apply text-green hover:underline;
+        }
+
+        ul {
+            @apply list-disc ml-8;
+        }
+
+        blockquote {
+            @apply ml-2 bg-surface0 p-1 rounded-md;
+        }
+    }
+</style>
