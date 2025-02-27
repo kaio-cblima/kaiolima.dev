@@ -4,7 +4,7 @@ title: "Self Hosting Yuzu Server: Deploying with Docker"
 pubDate: 2024-09-16
 description: "A step by step tutorial for deploying a Yuzu multiplayer server using Docker and how to play Mario Kart 8 Deluxe"
 author: 'Kaio Lima'
-tags: ["docker", "tutorial", "linux"]
+tags: ["docker", "tutorial", "linux", "self-hosted", "open-source"]
 ---
 While playing games, one of my friends asked if we could play Mario Kart 8 Deluxe against each other on Yuzu. We tried using public rooms, but since we're from Brazil, latency was high playing on mostly European servers. That's why I decided self host a server in Brazil.
 
